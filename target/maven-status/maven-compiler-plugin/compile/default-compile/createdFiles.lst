@@ -1,0 +1,7 @@
+com\mycompany\springjpa\entities\Trainer.class
+com\mycompany\springjpa\configuration\SpringJPAInitializer.class
+com\mycompany\springjpa\services\TrainerService.class
+com\mycompany\springjpa\controllers\TrainersController.class
+com\mycompany\springjpa\entities\Trainer_.class
+com\mycompany\springjpa\entities\TrainerDao.class
+com\mycompany\springjpa\configuration\SpringJPAConfiguration.class
