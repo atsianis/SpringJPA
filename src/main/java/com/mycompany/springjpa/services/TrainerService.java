@@ -28,4 +28,9 @@ public class TrainerService {
         TrainerDao tdao = new TrainerDao();
         return tdao.addTrainer(t);
     }
+    
+    public boolean deleteTrainer(int id){
+        TrainerDao tdao = new TrainerDao();
+        return tdao.deleteTrainer(id);
+    }
 }

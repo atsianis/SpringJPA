@@ -106,5 +106,20 @@ public class TrainersController {
             model.addAttribute("trainers", trainers);
             return "trainers";
         }
+        
+        @RequestMapping(value = "/trainerdelete/{id}", method = RequestMethod.GET)
+	public String delete(ModelMap model, @PathVariable int id) {
+                TrainerService ts = new TrainerService();
+                boolean b = ts.deleteTrainer(id);
+                if (b==true){
+                    model.addAttribute("message", "Row successfully deleted");
+                }else{
+                    model.addAttribute("message", "Row could not be deleted");
+                }
+                List<Trainer> trainers = ts.getTrainers();
+                model.addAttribute("trainers", trainers);
+                return "trainers";
+                
+	}
 
 }

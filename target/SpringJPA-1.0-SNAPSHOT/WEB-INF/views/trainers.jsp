@@ -28,6 +28,7 @@
                 <tr><td>${t.firstName}</td><td>${t.lastName}</td><td>${t.subject}</td><td><a href="trainerupdate/${t.trainerId}">Edit</a></td><td><a href="trainerdelete/${t.trainerId}">Delete</a></td></tr>
             </c:forEach>
         </table>
-        <p>${message}</p>
+        <p>${message}</p><br>
+        <p><a href="/SpringJPA">Home Page</a>
     </body>
 </html>

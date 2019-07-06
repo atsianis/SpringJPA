@@ -91,4 +91,29 @@ public class TrainerDao {
         
     }
     
+    public boolean deleteTrainer(int id){
+        boolean completed = false;
+        EntityManagerFactory emf = javax.persistence.Persistence.createEntityManagerFactory("com.mycompany_SpringJPA_war_1.0-SNAPSHOTPU");
+        EntityManager em = emf.createEntityManager();
+        
+        Query query = em.createNamedQuery("Trainer.findByTrainerId").setParameter("trainerId",id);
+        Trainer tFromDB = (Trainer) query.getSingleResult();
+        em.getTransaction().begin();
+        try {
+            em.remove(tFromDB);
+            em.getTransaction().commit();
+            completed = true;
+        } catch(Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        }
+        finally {
+            em.close();
+            emf.close();
+        }
+        return completed;
+        
+    
+    }
+    
 }
