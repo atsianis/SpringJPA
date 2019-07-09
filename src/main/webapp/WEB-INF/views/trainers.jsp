@@ -16,16 +16,16 @@
         <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>   
         <script type="text/javascript">
              $(document).ready(function() {
-                $('#trainers').DataTable();
+                $('.myTable').DataTable();
             });
         </script>
     </head>
     <body>
 
-        <table border="1" id="trainers">
-            <tr><td>First Name</td><td>Last Name</td><td>Subject</td></tr>
+        <table border="1" id="example" class="stripe order-column hover cell-border display myTable" style="width:100%">
+            <tr><th>First Name</th><th>Last Name</th><th>Subject</th></tr>
             <c:forEach var="t" items="${trainers}">
-                <tr><td>${t.firstName}</td><td>${t.lastName}</td><td>${t.subject}</td><td><a href="trainerupdate/${t.trainerId}">Edit</a></td><td><a href="trainerdelete/${t.trainerId}">Delete</a></td></tr>
+                <tr><td>${t.firstName}</td><td>${t.lastName}</td><td>${t.subject}</td><td><a href="/SpringJPA/trainerupdate/${t.trainerId}">Edit</a></td><td><a href="/SpringJPA/trainerdelete/${t.trainerId}">Delete</a></td></tr>
             </c:forEach>
         </table>
         <p>${message}</p><br>

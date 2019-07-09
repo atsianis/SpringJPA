@@ -69,10 +69,11 @@ public class TrainerDao {
         return completed;
     }
     
-    public boolean addTrainer(Trainer t){
+    public boolean addTrainer(String fname,String lname,String subject){
         boolean completed = false;
         EntityManagerFactory emf = javax.persistence.Persistence.createEntityManagerFactory("com.mycompany_SpringJPA_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
+        Trainer t = new Trainer(fname,lname,subject);
         
         em.getTransaction().begin();
         try {

@@ -5,6 +5,7 @@ import com.mycompany.springjpa.services.TrainerService;
 import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -56,56 +57,53 @@ public class TrainersController {
 	public String update(ModelMap model, @PathVariable int id) {
                 TrainerService ts = new TrainerService();
                 Trainer t = ts.getTrainerById(id);
-		model.addAttribute("t", t);
+		model.addAttribute("trainer", t);
                 model.addAttribute("title","update");
-                model.addAttribute("what","update");
+                model.addAttribute("what","save");
 		return "addEditTrainer";
 	}
         
-        @RequestMapping(value = "/trainerupdate", method = RequestMethod.POST)
-	public String updateSave(ModelMap model,
-                @RequestParam("id") int id,
-                @RequestParam("firstName") String fname,
-                @RequestParam("lastName") String lname,
-                @RequestParam("subject") String subject) {
-                Trainer t = new Trainer(id,fname,lname,subject);
-                TrainerService ts = new TrainerService();
-                boolean b = ts.updateTrainer(t);
-		if (b==true){
-                    model.addAttribute("message", "Trainer "+t.getTrainerId()+" updated");
-                }else{
-                    model.addAttribute("message", "Problem with update");
-                }
-                List<Trainer> trainers = ts.getTrainers();
-		model.addAttribute("trainers", trainers);
-                return "trainers";
-	}
-        
-        @RequestMapping(value = "/traineradd", method = RequestMethod.GET)
-	public String add(ModelMap model) {
-            model.addAttribute("title", "Add");
-            model.addAttribute("what", "save");
-            return "addEditTrainer";
-        }
-        
         @RequestMapping(value = "/trainersave", method = RequestMethod.POST)
-	public String addsave(ModelMap model,
-            @RequestParam("firstName") String fname,
-            @RequestParam("lastName") String lname,
-            @RequestParam("subject") String subject) {
-            
-            Trainer t = new Trainer(fname,lname,subject);
+        public String save(ModelMap model, @ModelAttribute("trainer") Trainer t) {
             TrainerService ts = new TrainerService();
-            boolean b = ts.addTrainer(t);
-            if (b==true){
-                model.addAttribute("message", "Trainer added");
-            }else{
-                model.addAttribute("message", "Problem with insertion");
+            if (t.getTrainerId() == null) {//new trainer
+                ts.addTrainer(t.getFirstName(), t.getLastName(), t.getSubject());
+                model.addAttribute("message", "Insert Completed");
+            } else {//update old trainer
+                ts.updateTrainer(t);
+                model.addAttribute("message", "Update Completed");
             }
             List<Trainer> trainers = ts.getTrainers();
             model.addAttribute("trainers", trainers);
             return "trainers";
         }
+        
+        @RequestMapping(value = "/traineradd", method = RequestMethod.GET)
+	public String add(ModelMap model) {
+            model.addAttribute("title", "Add");
+            model.addAttribute("what", "save");
+            model.addAttribute("trainer",new Trainer());
+            return "addEditTrainer";
+        }
+        
+//        @RequestMapping(value = "/trainersave", method = RequestMethod.POST)
+//	public String addsave(ModelMap model,
+//            @RequestParam("firstName") String fname,
+//            @RequestParam("lastName") String lname,
+//            @RequestParam("subject") String subject) {
+//            
+//            Trainer t = new Trainer(fname,lname,subject);
+//            TrainerService ts = new TrainerService();
+//            boolean b = ts.addTrainer(t);
+//            if (b==true){
+//                model.addAttribute("message", "Trainer added");
+//            }else{
+//                model.addAttribute("message", "Problem with insertion");
+//            }
+//            List<Trainer> trainers = ts.getTrainers();
+//            model.addAttribute("trainers", trainers);
+//            return "trainers";
+//        }
         
         @RequestMapping(value = "/trainerdelete/{id}", method = RequestMethod.GET)
 	public String delete(ModelMap model, @PathVariable int id) {

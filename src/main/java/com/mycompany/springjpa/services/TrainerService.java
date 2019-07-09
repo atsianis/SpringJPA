@@ -24,9 +24,9 @@ public class TrainerService {
         return tdao.updateTrainer(t);
     }
     
-    public boolean addTrainer(Trainer t){
+    public boolean addTrainer(String fname,String lname,String subject){
         TrainerDao tdao = new TrainerDao();
-        return tdao.addTrainer(t);
+        return tdao.addTrainer(fname,lname,subject);
     }
     
     public boolean deleteTrainer(int id){

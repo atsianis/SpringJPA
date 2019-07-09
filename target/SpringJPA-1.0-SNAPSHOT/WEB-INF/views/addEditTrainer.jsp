@@ -3,7 +3,7 @@
     Created on : 6 Ιουλ 2019, 1:07:50 πμ
     Author     : samsung np350
 --%>
-
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -15,19 +15,19 @@
         <script type="text/javascript" language="javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>   
         <script type="text/javascript">
             $(document).ready(function() {
-                $('#myTable').DataTable();
+                $('.myTable').DataTable();
             });
         </script>
     </head>
     <body>
         <h1>${title} Trainer</h1>
-        <form method="POST" modelAttribute="trainer" action="/SpringJPA/trainer${what}">
-            <table border="1" id="myTable">
-                <tr><td>First Name</td><td>Last Name</td><td>Subject</td></tr>
-                <tr><td><input type="text" name="firstName" value="${t.firstName}"></td><td><input type="text" name="lastName" value="${t.lastName}"></td><td><input type="text" name="subject" value="${t.subject}"></td></tr>
+        <form:form method="POST" modelAttribute="trainer" action="/SpringJPA/trainer${what}">
+            <table border="1" id="example" class="stripe order-column hover cell-border display myTable" style="width:100%">
+                <tr><th>First Name</th><th>Last Name</th><th>Subject</th></tr>
+                <tr><td><form:input path="firstName"/></td><td><form:input path="lastName"/></td><td><form:input path="subject"/></td></tr>
             </table>
-                <input type="number" hidden=true name="id" value="${t.trainerId}">
-            <input type="submit" value="${title} Trainer">
-        </form>
+                <form:input type="hidden" path="trainerId"/>
+            <input type="submit" value="${title} Trainer"/>
+        </form:form>
     </body>
 </html>
