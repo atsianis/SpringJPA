@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/")
@@ -45,13 +44,13 @@ public class TrainersController {
 		return "trainers";
 	}
         
-        @RequestMapping(value = "/trainerbyid", method = RequestMethod.GET)
-	public String getTrainerById(ModelMap model) {
-                TrainerService ts = new TrainerService();
-                Trainer t = ts.getTrainerById(2);
-		model.addAttribute("t", t);
-		return "trainerbyid";
-	}
+//        @RequestMapping(value = "/trainerbyid", method = RequestMethod.GET)
+//	public String getTrainerById(ModelMap model) {
+//                TrainerService ts = new TrainerService();
+//                Trainer t = ts.getTrainerById(2);
+//		model.addAttribute("t", t);
+//		return "trainerbyid";
+//	}
         
         @RequestMapping(value = "/trainerupdate/{id}", method = RequestMethod.GET)
 	public String update(ModelMap model, @PathVariable int id) {

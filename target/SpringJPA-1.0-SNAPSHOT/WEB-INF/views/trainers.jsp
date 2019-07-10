@@ -23,7 +23,7 @@
     <body>
 
         <table border="1" id="example" class="stripe order-column hover cell-border display myTable" style="width:100%">
-            <tr><th>First Name</th><th>Last Name</th><th>Subject</th></tr>
+            <tr><th>First Name</th><th>Last Name</th><th>Subject</th><th>Update</th><th>Delete</th></tr>
             <c:forEach var="t" items="${trainers}">
                 <tr><td>${t.firstName}</td><td>${t.lastName}</td><td>${t.subject}</td><td><a href="/SpringJPA/trainerupdate/${t.trainerId}">Edit</a></td><td><a href="/SpringJPA/trainerdelete/${t.trainerId}">Delete</a></td></tr>
             </c:forEach>
